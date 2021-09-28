@@ -21,8 +21,6 @@ const stripipfsprefix = (cid) => {
 export const FetchImage = async (ipfs: any, hash: string) => {
   hash = stripipfsprefix(hash)
   let ui8arr: any = [];
-  console.log(ipfs)
-  // @ts-ignore
   for await (const result of ipfs.cat(hash)) {
     ui8arr.push(result);
   }
@@ -34,8 +32,6 @@ export const FetchImage = async (ipfs: any, hash: string) => {
 export const FetchJson = async (ipfs: any, hash: string) => {
   hash = stripipfsprefix(hash);
   let str="";
-  console.log(ipfs)
-  // @ts-ignore
   for await (const result of ipfs.cat(hash)) {
     str += String.fromCharCode.apply(null, result);
   }

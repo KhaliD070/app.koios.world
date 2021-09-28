@@ -2,7 +2,6 @@ import Web3 from "web3";
 import { web3Modal } from './WalletProvider';
 import { FindProfile } from './FindProfile';
 import { FetchImage } from "./Ipfs";
-import { useIpfs } from "../../providers/IpfsProvider";
 
 export let provider;
 export let selectedAccount;

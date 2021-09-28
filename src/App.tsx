@@ -23,7 +23,7 @@ import ExplanationVideos from "./pages/ExplanationVideos";
 import Earn from "./pages/Earn";
 import VacancyDetail from "./pages/VacancyDetail";
 
-import { IpfsProvider, useIpfs } from "./providers/IpfsProvider";
+import { IpfsProvider } from "./providers/IpfsProvider";
 //import { FirstRun } from "./components/Web3/Web3";
 
 export const App = () => {

@@ -1,11 +1,11 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import {
   getTokenCountTDFA,
   getTokenCountBlockchain,
   getTokenCountOverall,
 } from "../components/Web3/Tokencount";
 import Loading from "../components/Loading";
-import ipfsContext from "../Context/ipfsContext";
+import { useIpfs } from "../providers/IpfsProvider";
 
 declare global {
   interface Window {
@@ -18,32 +18,41 @@ export const Leaderboard = () => {
   const [leaderboard, showLeaderboard] = useState<any[]>([]);
   const [active, setActive] = useState<string>("Blockchain");
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  //@ts-ignore
-  const { ipfs } = useContext(ipfsContext);
+  const { ipfs } = useIpfs();
+  const { ipfsLoaded } = useIpfs();
 
   useEffect(() => {
-    updateLeaderboardBlockchain();
-  }, []);
+    if (ipfsLoaded.current) {
+      updateLeaderboardBlockchain();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ipfsLoaded.current]);
 
   const updateLeaderboardBlockchain = async () => {
-    setIsLoading(true);
-    const updatedRanking = await getTokenCountBlockchain(ipfs);
-    showLeaderboard(updatedRanking);
-    setIsLoading(false);
+    if (ipfsLoaded.current) {
+      setIsLoading(true);
+      const updatedRanking = await getTokenCountBlockchain(ipfs);
+      showLeaderboard(updatedRanking);
+      setIsLoading(false);
+    }
   };
 
   const updateLeaderboardTDFA = async () => {
-    setIsLoading(true);
-    const updatedRanking = await getTokenCountTDFA(ipfs);
-    showLeaderboard(updatedRanking);
-    setIsLoading(false);
+    if (ipfsLoaded.current) {
+      setIsLoading(true);
+      const updatedRanking = await getTokenCountTDFA(ipfs);
+      showLeaderboard(updatedRanking);
+      setIsLoading(false);
+    }
   };
 
   const updateLeaderboardOverall = async () => {
-    setIsLoading(true);
-    const updatedRanking = await getTokenCountOverall(ipfs);
-    showLeaderboard(updatedRanking);
-    setIsLoading(false);
+    if (ipfsLoaded.current) {
+      setIsLoading(true);
+      const updatedRanking = await getTokenCountOverall(ipfs);
+      showLeaderboard(updatedRanking);
+      setIsLoading(false);
+    }
   };
 
   return (

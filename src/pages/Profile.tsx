@@ -14,6 +14,7 @@ import { Connect, Disconnect } from "../components/Web3/ConnectionCheck";
 import { web3Modal } from "../components/Web3/WalletProvider";
 import { UserContext } from "../Context/UserContext";
 import { useIpfs } from "../providers/IpfsProvider";
+import { firstRun } from "../components/Web3/Web3";
 
 export const Profile = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -21,6 +22,7 @@ export const Profile = () => {
   const [tokens, setTokens] = useState<any>();
   const { user, setUser } = useContext(UserContext);
   const { ipfs } = useIpfs();
+  const { ipfsLoaded } = useIpfs();
 
   const modalState = () => {
     setIsModalOpen(!isModalOpen);
@@ -51,10 +53,22 @@ export const Profile = () => {
   }, [user]);
 
   useEffect(() => {
-    getBadges();
-    getTokens();
+    if (ipfs) {
+      ipfs.swarm.connect(
+        "/dns4/mgatsonides.nl/tcp/4002/wss/p2p/12D3KooWRhMBxbNnDUD97Y2nV3VgGBXGGTtKiGwXjLbqjCyyktNC"
+      );
+      firstRun(ipfs);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedAccount]);
+  }, [ipfsLoaded.current]);
+
+  useEffect(() => {
+    if (ipfsLoaded.current) {
+      getBadges();
+      getTokens();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedAccount, ipfsLoaded.current]);
 
   const getTokens = async () => {
     let tokens = await ProfileTokenInformation(ipfs);

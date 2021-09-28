@@ -10141,7 +10141,7 @@
     "react-native-fetch-api" "^2.0.0"
     "stream-to-it" "^0.2.2"
 
-"ipfs@^0.58.4":
+"ipfs@^0.58.6":
   "integrity" "sha512-/LH4lbO7xs3Ent82XwR+Ud3eq8ozx/5xqjnApANOcOKfvjSISEHNf+p3zzhpir6i5nXwNhyCd27gJCKsdDEsYw=="
   "resolved" "https://registry.npmjs.org/ipfs/-/ipfs-0.58.6.tgz"
   "version" "0.58.6"
