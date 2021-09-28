@@ -1,5 +1,5 @@
 import { selectedAccount } from "./Web3";
-import { fetchImage, fetchJson } from "./Ipfs";
+import { FetchImage, FetchJson } from "./Ipfs";
 
 const GetBadges = async () => {
   const query = `
@@ -33,7 +33,7 @@ const BadgesJson = async () => {
         let limit = user.tokens.length;
         if (user.tokens.length > 3) limit = 3;
         for (let i = 0; i < limit; i++) {
-          let entry = await fetchJson(user.tokens[i].contentURI);
+          let entry = await FetchJson(user.tokens[i].contentURI);
           resultArray.push(entry);
         }
       }
@@ -46,7 +46,7 @@ export const ShowBadges = async () => {
   const badgesJson = await BadgesJson();
   let resultArray: any = [];
   for (let badges of badgesJson) {
-    let entry = { name: badges.name, image: await fetchImage(badges.image) };
+    let entry = { name: badges.name, image: await FetchImage(badges.image) };
     resultArray.push(entry);
   }
   return resultArray;

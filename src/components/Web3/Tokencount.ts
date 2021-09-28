@@ -1,5 +1,5 @@
 import LeaderboardAddresses from "./static/addresses.json";
-import { fetchImage, fetchJson } from "./Ipfs";
+import { FetchImage, FetchJson } from "./Ipfs";
 import { FindProfile } from "./FindProfile";
 import { selectedAccount } from "./Web3";
 import { GetTokenHoldersJSON } from "./GraphQueries";
@@ -42,7 +42,7 @@ export const getTokenCountTDFA = async () => {
       if (values[i] !== undefined) {
         tokenholdersTDFA[i].address = values[i].name;
         if (values[i].image !== undefined) {
-          tokenholdersTDFA[i].image = await fetchImage(values[i].image);
+          tokenholdersTDFA[i].image = await FetchImage(values[i].image);
         }
       }
     }
@@ -88,7 +88,7 @@ export const getTokenCountBlockchain = async () => {
       if (values[i] !== undefined) {
         tokenholdersBlockchain[i].address = values[i].name;
         if (values[i].image !== undefined) {
-          tokenholdersBlockchain[i].image = await fetchImage(values[i].image);
+          tokenholdersBlockchain[i].image = await FetchImage(values[i].image);
         }
       }
     }
@@ -134,7 +134,7 @@ export const getTokenCountOverall = async () => {
       if (values[i] !== undefined) {
         tokenholdersOverall[i].address = values[i].name;
         if (values[i].image !== undefined) {
-          tokenholdersOverall[i].image = await fetchImage(values[i].image);
+          tokenholdersOverall[i].image = await FetchImage(values[i].image);
         }
       }
     }
@@ -149,10 +149,10 @@ export const ProfileTokenInformation = async () => {
   for (let user of tokenHolders.data.users) {
     if (selectedAccount) {
       if (selectedAccount.toLowerCase() === user.address) {
-        let contentURI = await fetchJson(user.contentURI);
+        let contentURI = await FetchJson(user.contentURI);
         let symbol = user.symbol;
         let balance = Math.round(user.balance / 10 ** 18);
-        let entry = { "symbol": symbol, "balance": balance, "image": await fetchImage(contentURI.image) };
+        let entry = { "symbol": symbol, "balance": balance, "image": await FetchImage(contentURI.image) };
         resultArray.push(entry);
       }
     }
