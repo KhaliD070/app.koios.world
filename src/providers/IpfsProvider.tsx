@@ -1,4 +1,3 @@
-import * as React from "react";
 import { useEffect, useState, useContext, useRef } from "react";
 
 import useIpfsSetup from "../components/Web3/useIpfsSetup";

@@ -1,12 +1,13 @@
 import { useEffect, useState} from "react";
 import { useIpfs } from "../../providers/IpfsProvider";
-import useOrbit from "./useOrbit";
+import useOrbit from "./useSetupOrbit";
 
 const useOrbitDb = (address, options = {}) => {
-  const {ipfs} = useIpfs()
-  const [orbit] = useOrbit(ipfs)
+  //@ts-ignore
+  const { orbit } = useOrbit();
   const [records, setRecords] = useState(null);
   const [orbitDb, setDb] = useState(null);
+
   useEffect(() => {
     if (orbitDb) return;
     if (!address) return;

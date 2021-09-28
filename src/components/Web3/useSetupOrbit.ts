@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import OrbitDB from "orbit-db";
 
-const useOrbit = (ipfs) => {
+const useSetupOrbit = (ipfs) => {
   const [orbit, setOrbit] = useState(null);
 
   useEffect(() => {
@@ -20,4 +20,4 @@ const useOrbit = (ipfs) => {
   return [orbit];
 };
 
-export default useOrbit;
+export default useSetupOrbit;
