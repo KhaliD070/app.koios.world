@@ -27,12 +27,16 @@ All way too techie for class 1 😄. Remember: blockchains are an innovation of 
 Let's start with the basics: understand what a ledger is and grasp its concepts. So what is it? A ledger is a tool we use to record transactions. But what are "transactions"? "Transactions" are nothing more than (economic) activities where people "exchange value". So "exchange" means that the value goes from "one person to the other person". Or instead of between people, between legal entities like foundations and corporations. Or even between machines nowadays!
 
 >💡 Different 'entities' can exchange value in a ledger.
+
+
 <blockquote style="border-color: #ff0bac"> ❓ Can you think of other types of entities that can interact in a ledger? [Check answers 🦉](https://twitter.com/JordiJansen101/status/1431241847578501125?s=20)
 </blockquote>
 
 And "value" can mean "anything, as long as we (humans) deem it valuable". Many books write about 'value' over time, and many would love to enter the philosophical spheres about value. What might be valuable to you now but not be beneficial to somebody else. Or is value always measurable? **The types of value we are talking about are metric by nature**. So you can measure them, which is needed to record them in a ledger. Try to record the value 'love 💘'? And no: not talking about paid love. So value is often represented as something metric, usually monetary. Still, it could also represent values in other notations. 
 
 >💡 Value can take many forms. For example, in ledgers, we record measurable values. 
+
+
 <blockquote style="border-color: #ff0bac"> ❓ What do you deem valuable? Can that value be recorded in a ledger? [Check answers 🦉](https://twitter.com/JordiJansen101/status/1431242496168927234?s=20)</blockquote>
 
 
@@ -56,10 +60,11 @@ And that's where you & your ledger start to become active. Because you, from the
 
 >💡 This overview of **'who owns what, when in time'** is also known as the **'state of the ledger'**. A good ledger mimics the world as best as possible.
 
-With each transaction, the state of the ledger changes. A trade would be;
-* Friend B: "can you scratch my back? I have an itch there."
-* Friend D: "Yeah, sure. But it will cost you $1."
-* Friend B: "I will give you a dollar if you scratch my back."
+With each transaction, the state of the ledger changes. A trade would be:
+
+- Friend B: "can you scratch my back? I have an itch there."
+- Friend D: "Yeah, sure. But it will cost you $1."
+- Friend B: "I will give you a dollar if you scratch my back."
 
 You must record the transfer of this 1$ from friend B to friend D. Not only does the dollar physically transfer, from hand to hand, where your friend D now has $11, and your friend B has $9. It also needs to be recorded in your ledger. You are on the sidelines, witnessing the transaction, so you register $ -1 at friend B en $+1 for friend D. The ledger is the tool you use to record the transfer of value. You mimic the world, the world of physical cash in this case, as best as possible. We will explain later why you want to keep track of those transactions / why this is important! So far, remember that a ledger is a tool we use to record transactions, a.k.a. value exchanges.
 
@@ -75,7 +80,7 @@ Ledgers are tools to record economic activities, known as transactions, which tr
 
 In the next class, we will explain WHY ledgers have an essential role.
 
-## Homework 1.1 Ledgernomics
+## Portfolio assignment 1.1.1 What is a ledger 
 Which transfers of value from your everyday life are recorded in a ledger? Think beyond the examples mentioned in the video and come up with at least five new examples. Pro-tip: check out the answers for inspiration in the class Twitter thread.
 
 ## Further readings (sources or support)

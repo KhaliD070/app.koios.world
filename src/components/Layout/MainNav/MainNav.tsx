@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Icon } from "../../Util/Icon";
 import { useSizes } from "../../Util/useSizes";
@@ -159,7 +159,7 @@ export const MainNav = () => {
             </p>
           )}
           {user && (
-            <>
+            <Link to={"/profile"} className={"user-profile__link"}>
               {!profilePicture ? (
                 <img
                   className="user-profile__profile-picture"
@@ -181,7 +181,7 @@ export const MainNav = () => {
                   {selectedAccount}
                 </p>
               </div>
-            </>
+            </Link>
           )}
         </div>
       </nav>

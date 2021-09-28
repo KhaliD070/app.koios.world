@@ -12,6 +12,10 @@
       {
         "linkTitle": "See schedule",
         "linkUrl": "https://docs.google.com/spreadsheets/d/1ykzSXWojCVEou3GSyweuMS1lg3nvlpOZL9Kq8OzpnHA/edit?usp=sharing"
+      },
+      {
+        "linkTitle": "Portfolio assignments",
+        "linkUrl": "https://docs.google.com/document/d/1SY8OrJW4QRkzumRzvyI3PfrLJ1OBMeir/edit?usp=sharing&ouid=109981115093012562629&rtpof=true&sd=true"
       }
     ],
     "content": [
@@ -19,19 +23,19 @@
         "title": "Blockchain level 1",
         "videoInfo": "QmT9vZ78djiZrQixsfTjWqDgbMZs7m6crrUj1hqgYLnY2E",
         "data": "QmTPZUavGLVspuoPHHwJwxbsrkt6V3bJPL7Q2ikLUNTS1c",
-        "subtitle": "Economics"
+        "subtitle": "Basic introduction"
       },
       {
         "title": "Blockchain level 2",
         "videoInfo": "QmVS36BRyF68YNS46dQ9xM3MLRnD2vgM84iV8w1mspyAyJ",
         "data": "QmXa6GF9MLBtpeE1dGpwm3GWvMbFYNh5whaaZuYjvyzErP",
-        "subtitle": "Distributed Ledger Technology"
+        "subtitle": "The fundamentals"
       },
       {
         "title": "Blockchain level 3",
         "videoInfo": "QmPMMaPkekVioCSPHmERYpJ7EdcUZGdSUNm5yGJEmouRji",
         "data": "QmNyDU4KauqoXQSHQphcbP8M6rsmaZcP5JEssRSULuw7Eg",
-        "subtitle": "Disruptive innovation"
+        "subtitle": "Disruptive economics"
       }
     ],
     "earn": [
@@ -101,8 +105,9 @@
           {
             "name": "Malva Ahmed",
             "imageUrl": "https://cdn.discordapp.com/avatars/801485039611150416/b091019dd6f35c6fe690480eb7992d53.png?size=256",
-            "description": "2 years in developer relations in blockchain",
-            "twitterLink": "https://twitter.com",
+            "description": "Coordinator Koios minors",
+            "linkedinLink": "https://linkedin.com/in/malva-ahmed",
+            "twitterLink": "",
             "twitterHandle": "",
             "discordLink": "https://discord.com/users/801485039611150416",
             "discordHandle": "Malva.koios"
@@ -111,7 +116,7 @@
             "name": "Dennis IJlst",
             "imageUrl": "https://cdn.discordapp.com/avatars/801334609915805696/ae53525397d14f769f154c465ebded2a.png?size=256",
             "description": "2 years in developer relations in blockchain",
-            "twitterLink": "https://twitter.com",
+            "twitterLink": "",
             "twitterHandle": "",
             "discordLink": "https://discord.com/users/801334609915805696",
             "discordHandle": "Dennis.koios"
@@ -212,7 +217,8 @@
             "name": "Malva Ahmed",
             "imageUrl": "https://cdn.discordapp.com/avatars/801485039611150416/b091019dd6f35c6fe690480eb7992d53.png?size=256",
             "description": "Coordinator minor",
-            "twitterLink": "https://twitter.com",
+            "linkedinLink": "https://linkedin.com/in/malva-ahmed",
+            "twitterLink": "",
             "twitterHandle": "",
             "discordLink": "https://discord.com/users/801485039611150416",
             "discordHandle": "Malva.koios"
