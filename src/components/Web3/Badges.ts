@@ -24,7 +24,7 @@ const GetBadges = async () => {
   return json;
 };
 
-const BadgesJson = async () => {
+const BadgesJson = async (ipfs: any) => {
   let resultArray: any = [];
   const badgeHolders = await GetBadges();
   for (let user of badgeHolders.data.users) {
@@ -33,7 +33,7 @@ const BadgesJson = async () => {
         let limit = user.tokens.length;
         if (user.tokens.length > 3) limit = 3;
         for (let i = 0; i < limit; i++) {
-          let entry = await FetchJson(user.tokens[i].contentURI);
+          let entry = await FetchJson(ipfs, user.tokens[i].contentURI);
           resultArray.push(entry);
         }
       }
@@ -42,11 +42,11 @@ const BadgesJson = async () => {
   return resultArray;
 };
 
-export const ShowBadges = async () => {
-  const badgesJson = await BadgesJson();
+export const ShowBadges = async (ipfs: any) => {
+  const badgesJson = await BadgesJson(ipfs);
   let resultArray: any = [];
   for (let badges of badgesJson) {
-    let entry = { name: badges.name, image: await FetchImage(badges.image) };
+    let entry = { name: badges.name, image: await FetchImage(ipfs, badges.image) };
     resultArray.push(entry);
   }
   return resultArray;

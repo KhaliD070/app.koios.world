@@ -5,7 +5,7 @@ import { selectedAccount } from "./Web3";
 import { GetTokenHoldersJSON } from "./GraphQueries";
 
 
-export const getTokenCountTDFA = async () => {
+export const getTokenCountTDFA = async (ipfs: any) => {
   const tokenholders = await GetTokenHoldersJSON();
   const tokenholdersTDFA: any = [];
   let usernamePromises: any = [];
@@ -42,7 +42,7 @@ export const getTokenCountTDFA = async () => {
       if (values[i] !== undefined) {
         tokenholdersTDFA[i].address = values[i].name;
         if (values[i].image !== undefined) {
-          tokenholdersTDFA[i].image = await FetchImage(values[i].image);
+          tokenholdersTDFA[i].image = await FetchImage(ipfs, values[i].image);
         }
       }
     }
@@ -51,7 +51,7 @@ export const getTokenCountTDFA = async () => {
   return tokenholdersTDFA;
 }
 
-export const getTokenCountBlockchain = async () => {
+export const getTokenCountBlockchain = async (ipfs: any) => {
   const tokenholders = await GetTokenHoldersJSON();
   const tokenholdersBlockchain: any = [];
   let usernamePromises: any = [];
@@ -88,7 +88,7 @@ export const getTokenCountBlockchain = async () => {
       if (values[i] !== undefined) {
         tokenholdersBlockchain[i].address = values[i].name;
         if (values[i].image !== undefined) {
-          tokenholdersBlockchain[i].image = await FetchImage(values[i].image);
+          tokenholdersBlockchain[i].image = await FetchImage(ipfs, values[i].image);
         }
       }
     }
@@ -97,7 +97,7 @@ export const getTokenCountBlockchain = async () => {
   return tokenholdersBlockchain;
 }
 
-export const getTokenCountOverall = async () => {
+export const getTokenCountOverall = async (ipfs: any) => {
   const tokenholders = await GetTokenHoldersJSON();
   const tokenholdersOverall: any = [];
   let usernamePromises: any = [];
@@ -134,7 +134,7 @@ export const getTokenCountOverall = async () => {
       if (values[i] !== undefined) {
         tokenholdersOverall[i].address = values[i].name;
         if (values[i].image !== undefined) {
-          tokenholdersOverall[i].image = await FetchImage(values[i].image);
+          tokenholdersOverall[i].image = await FetchImage(ipfs, values[i].image);
         }
       }
     }
@@ -143,16 +143,16 @@ export const getTokenCountOverall = async () => {
   return tokenholdersOverall;
 }
 
-export const ProfileTokenInformation = async () => {
+export const ProfileTokenInformation = async (ipfs: any) => {
   const tokenHolders = await GetTokenHoldersJSON();
   let resultArray: any = [];
   for (let user of tokenHolders.data.users) {
     if (selectedAccount) {
       if (selectedAccount.toLowerCase() === user.address) {
-        let contentURI = await FetchJson(user.contentURI);
+        let contentURI = await FetchJson(ipfs, user.contentURI);
         let symbol = user.symbol;
         let balance = Math.round(user.balance / 10 ** 18);
-        let entry = { "symbol": symbol, "balance": balance, "image": await FetchImage(contentURI.image) };
+        let entry = { "symbol": symbol, "balance": balance, "image": await FetchImage(ipfs, contentURI.image) };
         resultArray.push(entry);
       }
     }

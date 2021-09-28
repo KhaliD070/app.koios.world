@@ -2,6 +2,7 @@ import Web3 from "web3";
 import { web3Modal } from './WalletProvider';
 import { FindProfile } from './FindProfile';
 import { FetchImage } from "./Ipfs";
+import { useIpfs } from "../../providers/IpfsProvider";
 
 export let provider;
 export let selectedAccount;
@@ -9,37 +10,35 @@ export let selectedProfile;
 export let profilePicture;
 export let profileName;
 
-const fetchAccountData = async () => {
+const fetchAccountData = async (ipfs: any) => {
   const web3 = new Web3(provider);
 
   const accounts = await web3.eth.getAccounts();
   selectedAccount = accounts[0];
   selectedProfile = await FindProfile(selectedAccount);
   if (selectedProfile.image) {
-    profilePicture = await FetchImage(selectedProfile.image);
+    profilePicture = await FetchImage(ipfs, selectedProfile.image);
   }
   if (selectedProfile.name) {
     profileName = selectedProfile.name;
   }
 }
 
-export const connectWeb3 = async () => {
+export const connectWeb3 = async (ipfs: any) => {
   try {
     provider = await web3Modal.connect();
     if(!selectedAccount)
-      await fetchAccountData();
+      await fetchAccountData(ipfs);
   } catch (e) {
     console.log("Could not get a wallet connection", e);
   }
 };
 
-const firstRun = async () => {
+export const firstRun = async (ipfs: any) => {
   if (web3Modal.cachedProvider) {
-    await connectWeb3();
+    await connectWeb3(ipfs);
   }
-  }
-
-  firstRun();
+}
 
 export const disconnectWeb3 = async () => {
   if (provider) {

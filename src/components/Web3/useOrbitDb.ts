@@ -1,10 +1,9 @@
 import { useEffect, useState} from "react";
-import useIpfs from "./useIpfs";
+import { useIpfs } from "../../providers/IpfsProvider";
 import useOrbit from "./useOrbit";
-import IPFS_CONFIG from "./ipfs-config";
 
 const useOrbitDb = (address, options = {}) => {
-  const [ipfs] = useIpfs(IPFS_CONFIG)
+  const {ipfs} = useIpfs()
   const [orbit] = useOrbit(ipfs)
   const [records, setRecords] = useState(null);
   const [orbitDb, setDb] = useState(null);

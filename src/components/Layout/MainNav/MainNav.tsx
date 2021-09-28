@@ -3,21 +3,18 @@ import { Link, NavLink } from "react-router-dom";
 import { Icon } from "../../Util/Icon";
 import { useSizes } from "../../Util/useSizes";
 import koiosLogo from "../../../assets/images/logos/koios-logo.svg";
-import {
-  selectedAccount,
-  profilePicture,
-  profileName,
-} from "../../Web3/Web3";
+import { selectedAccount, profilePicture, profileName } from "../../Web3/Web3";
 import MainNavData from "./static/MainNavData.json";
 import { SvgSprite } from "../../Util/SvgSprite";
 import { Connect, Disconnect } from "../../Web3/ConnectionCheck";
 import { web3Modal } from "../../Web3/WalletProvider";
 import { UserContext } from "../../../Context/UserContext";
-
-
+import { useIpfs } from "../../../providers/IpfsProvider";
 
 export const MainNav = () => {
-  const {user, setUser} = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
+  //@ts-ignore
+  const { ipfs } = useIpfs();
 
   const { width } = useSizes();
   const isMobile = width < 769;
@@ -33,30 +30,26 @@ export const MainNav = () => {
     : (document.body.className = "");
 
   let initialDisconnectText = selectedAccount;
-  const [disconnectButtonText, setDisconnectButtonText] = useState(
-    "loading"
-  );
-
+  const [disconnectButtonText, setDisconnectButtonText] = useState("loading");
 
   const connectProvider = async () => {
-    const checkProvider = await Connect();
-    setUser(checkProvider)
-  }
+    const checkProvider = await Connect(ipfs);
+    setUser(checkProvider);
+  };
 
   const disconnectProvider = async () => {
     const checkProvider = await Disconnect();
-    setUser(checkProvider)
-  }
+    setUser(checkProvider);
+  };
 
-  useEffect( () => {
+  useEffect(() => {
     if (web3Modal.cachedProvider) {
-    connectProvider();
+      connectProvider();
     } else {
       disconnectProvider();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user])
-
+  }, [user]);
 
   useEffect(() => {
     setDisconnectButtonText(initialDisconnectText);
@@ -71,8 +64,9 @@ export const MainNav = () => {
       {isMobile && (
         <header className="header-mobile container">
           <button
-            className={`header-mobile__toggle ${isMenuOpen ? "header-mobile__toggle--rotate" : ""
-              }`}
+            className={`header-mobile__toggle ${
+              isMenuOpen ? "header-mobile__toggle--rotate" : ""
+            }`}
             onClick={toggleMenu}
           >
             <Icon type={isMenuOpen ? "close" : "hamburger"} />
@@ -89,8 +83,8 @@ export const MainNav = () => {
 
       <nav className={`main-nav ${isMenuOpen ? "main-nav--open" : ""}`}>
         <button
-            className={`main-nav__mobile__toggle ${!isMenuOpen ? "hidden" : ""}`}
-            onClick={toggleMenu}
+          className={`main-nav__mobile__toggle ${!isMenuOpen ? "hidden" : ""}`}
+          onClick={toggleMenu}
         >
           <Icon type={isMenuOpen ? "close" : "hamburger"} />
         </button>
@@ -107,10 +101,12 @@ export const MainNav = () => {
           <>
             <div
               id="disconnect-wallet"
-              className={'main-nav__wallet main-nav__wallet--disconnect'}
+              className={"main-nav__wallet main-nav__wallet--disconnect"}
               onClick={disconnectProvider}
               onMouseEnter={() => setDisconnectButtonText("Disconnect")}
-              onMouseLeave={() => setDisconnectButtonText(initialDisconnectText)}
+              onMouseLeave={() =>
+                setDisconnectButtonText(initialDisconnectText)
+              }
             >
               {disconnectButtonText}
             </div>
@@ -164,14 +160,26 @@ export const MainNav = () => {
           )}
           {user && (
             <>
-              {!profilePicture ?
-                  <img className="user-profile__profile-picture" src={"/images/pepe.png"} alt="Pepe the frog"/>
-                  :
-                  <img className="user-profile__profile-picture" src={profilePicture} alt="404"/>
-              }
-              <div className={'user-profile__textContainer'}>
-                <p className="user-profile__textContainer__profile-name">{profileName}</p>
-                <p className="user-profile__textContainer__pubkey">{selectedAccount}</p>
+              {!profilePicture ? (
+                <img
+                  className="user-profile__profile-picture"
+                  src={"/images/pepe.png"}
+                  alt="Pepe the frog"
+                />
+              ) : (
+                <img
+                  className="user-profile__profile-picture"
+                  src={profilePicture}
+                  alt="404"
+                />
+              )}
+              <div className={"user-profile__textContainer"}>
+                <p className="user-profile__textContainer__profile-name">
+                  {profileName}
+                </p>
+                <p className="user-profile__textContainer__pubkey">
+                  {selectedAccount}
+                </p>
               </div>
             </>
           )}

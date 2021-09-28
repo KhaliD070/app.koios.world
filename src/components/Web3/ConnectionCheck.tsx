@@ -1,8 +1,4 @@
-import {
-  connectWeb3,
-  disconnectWeb3,
-  provider,
-} from "./Web3";
+import { connectWeb3, disconnectWeb3, provider } from "./Web3";
 
 // export const ConnectionCheck = async () => {
 //   if (provider) {
@@ -16,8 +12,8 @@ import {
 //   }
 // };
 
-export const Connect = async () => {
-  await connectWeb3();
+export const Connect = async (ipfs: any) => {
+  await connectWeb3(ipfs);
   return provider;
 };
 

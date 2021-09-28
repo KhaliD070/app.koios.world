@@ -10,45 +10,45 @@ import { ShowBadges } from "../components/Web3/Badges";
 import { ProfileTokenInformation } from "../components/Web3/Tokencount";
 import { Icon } from "../components/Util/Icon";
 import ExploreMore from "../components/ExploreMore";
-import {Connect, Disconnect} from "../components/Web3/ConnectionCheck";
+import { Connect, Disconnect } from "../components/Web3/ConnectionCheck";
 import { web3Modal } from "../components/Web3/WalletProvider";
 import { UserContext } from "../Context/UserContext";
+import { useIpfs } from "../providers/IpfsProvider";
 
 export const Profile = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [badges, setBadges] = useState<any[]>();
   const [tokens, setTokens] = useState<any>();
-  const {user, setUser} = useContext(UserContext);
-
+  const { user, setUser } = useContext(UserContext);
+  const { ipfs } = useIpfs();
 
   const modalState = () => {
     setIsModalOpen(!isModalOpen);
   };
 
   const getBadges = async () => {
-    let badges = await ShowBadges();
+    let badges = await ShowBadges(ipfs);
     setBadges(badges);
   };
 
   const connectProvider = async () => {
-    const checkProvider = await Connect();
+    const checkProvider = await Connect(ipfs);
     setUser(checkProvider);
-  }
+  };
 
   const disconnectProvider = async () => {
     const checkProvider = await Disconnect();
     setUser(checkProvider);
-  }
+  };
 
-  useEffect( () => {
+  useEffect(() => {
     if (web3Modal.cachedProvider) {
-    connectProvider();
+      connectProvider();
     } else {
       disconnectProvider();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user])
-
+  }, [user]);
 
   useEffect(() => {
     getBadges();
@@ -57,9 +57,9 @@ export const Profile = () => {
   }, [selectedAccount]);
 
   const getTokens = async () => {
-    let tokens = await ProfileTokenInformation();
+    let tokens = await ProfileTokenInformation(ipfs);
     setTokens(tokens);
-  }
+  };
 
   return (
     <div className={"profile"}>
@@ -95,36 +95,44 @@ export const Profile = () => {
 
       {user && (
         <div className={"container"}>
-          <div className={'actionContainer'}>
-            <div className={'actionContainer__actions'}>
-            <div onClick={disconnectProvider} className={'actionContainer__actions__item'}>
-              <p>Logout</p>
-              <Icon type="sign-out" className="profile__sign-out" />
-            </div>
-            <a href={'https://3box.io/hub'} target={'_blank'} rel={'noreferrer noopener'} className={'actionContainer__actions__item'}>
-              <p>Edit profile</p>
-              <Icon type="edit-profile" className="profile__sign-out" />
-            </a>
+          <div className={"actionContainer"}>
+            <div className={"actionContainer__actions"}>
+              <div
+                onClick={disconnectProvider}
+                className={"actionContainer__actions__item"}
+              >
+                <p>Logout</p>
+                <Icon type="sign-out" className="profile__sign-out" />
+              </div>
+              <a
+                href={"https://3box.io/hub"}
+                target={"_blank"}
+                rel={"noreferrer noopener"}
+                className={"actionContainer__actions__item"}
+              >
+                <p>Edit profile</p>
+                <Icon type="edit-profile" className="profile__sign-out" />
+              </a>
             </div>
           </div>
-          {!profilePicture ?
+          {!profilePicture ? (
             <img
-                src={"/images/pepe.png"}
-                alt={"Pepe the frog"}
-                className={"profile__img"}
+              src={"/images/pepe.png"}
+              alt={"Pepe the frog"}
+              className={"profile__img"}
             />
-              :
-              <img
-                  src={profilePicture}
-                  alt={"User"}
-                  className={"profile__img profile__img--active"}
-              />
-          }
-          {!profileName ?
-              <h1 className={"profile__name"}>No 3Box profile name</h1>
-              :
-              <h1 className={"profile__name"}>{profileName}</h1>
-          }
+          ) : (
+            <img
+              src={profilePicture}
+              alt={"User"}
+              className={"profile__img profile__img--active"}
+            />
+          )}
+          {!profileName ? (
+            <h1 className={"profile__name"}>No 3Box profile name</h1>
+          ) : (
+            <h1 className={"profile__name"}>{profileName}</h1>
+          )}
           <div className="profile__network">
             <p className="profile__address">{selectedAccount}</p>
             {/*<a href={'https://3box.io/hub'}><Icon type="edit-profile" className="profile__sign-out" /></a>*/}
@@ -148,7 +156,9 @@ export const Profile = () => {
                   ))}
                 </ul>
               ) : (
-                <p className="achievements__list--empty">No achievements huh? Start learning to earn some!</p>
+                <p className="achievements__list--empty">
+                  No achievements huh? Start learning to earn some!
+                </p>
               )}
             </div>
             <div className="fungible-tokens">
@@ -159,7 +169,7 @@ export const Profile = () => {
                     <li className="fungible-tokens__list-item" key={index}>
                       <img
                         src={item.image}
-                        alt={'token'}
+                        alt={"token"}
                         className="fungible-tokens__img"
                       />
                       <p className="fungible-tokens__title">{"Titan: "}</p>
@@ -168,9 +178,10 @@ export const Profile = () => {
                   ))}
                 </ul>
               ) : (
-                <p className="fungible-tokens__list--empty">No tokens huh? Start learning to earn some!</p>
+                <p className="fungible-tokens__list--empty">
+                  No tokens huh? Start learning to earn some!
+                </p>
               )}
-
             </div>
           </div>
         </div>
@@ -189,7 +200,11 @@ export const Profile = () => {
       </div>
 
       {isModalOpen && <SetupModal modalState={modalState} />}
-      <ExploreMore title={'Explore more worlds'} buttonTitle={'Go to worlds'} buttonLink={'/worlds'} />
+      <ExploreMore
+        title={"Explore more worlds"}
+        buttonTitle={"Go to worlds"}
+        buttonLink={"/worlds"}
+      />
     </div>
   );
 };

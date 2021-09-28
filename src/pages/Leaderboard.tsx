@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import {
   getTokenCountTDFA,
   getTokenCountBlockchain,
-  getTokenCountOverall
+  getTokenCountOverall,
 } from "../components/Web3/Tokencount";
 import Loading from "../components/Loading";
+import ipfsContext from "../Context/ipfsContext";
 
 declare global {
   interface Window {
@@ -17,6 +18,8 @@ export const Leaderboard = () => {
   const [leaderboard, showLeaderboard] = useState<any[]>([]);
   const [active, setActive] = useState<string>("Blockchain");
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  //@ts-ignore
+  const { ipfs } = useContext(ipfsContext);
 
   useEffect(() => {
     updateLeaderboardBlockchain();
@@ -24,21 +27,21 @@ export const Leaderboard = () => {
 
   const updateLeaderboardBlockchain = async () => {
     setIsLoading(true);
-    const updatedRanking = await getTokenCountBlockchain();
+    const updatedRanking = await getTokenCountBlockchain(ipfs);
     showLeaderboard(updatedRanking);
     setIsLoading(false);
   };
 
   const updateLeaderboardTDFA = async () => {
     setIsLoading(true);
-    const updatedRanking = await getTokenCountTDFA();
+    const updatedRanking = await getTokenCountTDFA(ipfs);
     showLeaderboard(updatedRanking);
     setIsLoading(false);
   };
 
   const updateLeaderboardOverall = async () => {
     setIsLoading(true);
-    const updatedRanking = await getTokenCountOverall();
+    const updatedRanking = await getTokenCountOverall(ipfs);
     showLeaderboard(updatedRanking);
     setIsLoading(false);
   };
@@ -49,7 +52,9 @@ export const Leaderboard = () => {
       <div className="leaderboard-selector">
         <button
           className={`leaderboard-selector__button ${
-            active === "Blockchain" ? "leaderboard-selector__button--active active-leaderboard" : ""
+            active === "Blockchain"
+              ? "leaderboard-selector__button--active active-leaderboard"
+              : ""
           }`}
           onClick={() => {
             updateLeaderboardBlockchain();
@@ -60,7 +65,9 @@ export const Leaderboard = () => {
         </button>
         <button
           className={`leaderboard-selector__button ${
-            active === "TDFA" ? "leaderboard-selector__button--active active-leaderboard" : ""
+            active === "TDFA"
+              ? "leaderboard-selector__button--active active-leaderboard"
+              : ""
           }`}
           onClick={() => {
             updateLeaderboardTDFA();
@@ -71,7 +78,9 @@ export const Leaderboard = () => {
         </button>
         <button
           className={`leaderboard-selector__button ${
-            active === "Overall" ? "leaderboard-selector__button--active active-leaderboard" : ""
+            active === "Overall"
+              ? "leaderboard-selector__button--active active-leaderboard"
+              : ""
           }`}
           onClick={() => {
             updateLeaderboardOverall();
@@ -89,12 +98,19 @@ export const Leaderboard = () => {
           <h2 className="ranking__metadata-title">Titan-tokens</h2>
         </div>
 
-        {isLoading && <Loading/>}
+        {isLoading && <Loading />}
         {!isLoading && (
           <ul>
             {leaderboard.map((users: any, index: number) => {
               return (
-                <li key={index} className={`${users.selectedAccount ? 'ranking__item__currentUser' : 'ranking__item'}`}>
+                <li
+                  key={index}
+                  className={`${
+                    users.selectedAccount
+                      ? "ranking__item__currentUser"
+                      : "ranking__item"
+                  }`}
+                >
                   <p className="ranking__position">{users.index}</p>
                   <img
                     className={`ranking__user-image ${

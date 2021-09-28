@@ -1,11 +1,5 @@
-// import useIpfs from "./useIpfs";
-import IPFS_CONFIG from "./ipfs-config";
-import IPFS from "ipfs";
-
 //const ipfsHttpClient = require('ipfs-http-client')
 //const ipfs = ipfsHttpClient('https://ipfs.infura.io:5001');
-
-const ipfs = IPFS.create(IPFS_CONFIG)
 
 const ipfsprefix1 = "https://ipfs.io/ipfs/"
 const ipfsprefix2 = "ipfs://ipfs/"
@@ -24,10 +18,10 @@ const stripipfsprefix = (cid) => {
   return cid;
 }
 
-export const FetchImage = async (hash: string) => {
+export const FetchImage = async (ipfs: any, hash: string) => {
   hash = stripipfsprefix(hash)
   let ui8arr: any = [];
-  await ipfs
+  console.log(ipfs)
   // @ts-ignore
   for await (const result of ipfs.cat(hash)) {
     ui8arr.push(result);
@@ -37,10 +31,10 @@ export const FetchImage = async (hash: string) => {
   return url;
 }
 
-export const FetchJson = async (hash: string) => {
+export const FetchJson = async (ipfs: any, hash: string) => {
   hash = stripipfsprefix(hash);
   let str="";
-  await ipfs
+  console.log(ipfs)
   // @ts-ignore
   for await (const result of ipfs.cat(hash)) {
     str += String.fromCharCode.apply(null, result);
