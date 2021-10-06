@@ -1,46 +1,27 @@
-import type { DID } from 'dids';
-import type { IDX } from '@ceramicstudio/idx';
-import type { CeramicApi } from '@ceramicnetwork/common';
-import { getLegacy3BoxProfileAsBasicProfile } from '@ceramicstudio/idx';
+import { Core } from '@self.id/core';
+import { getLegacy3BoxProfileAsBasicProfile } from '@self.id/3box-legacy';
 
-import { createCeramic } from './Ceramic';
-import { createIDX } from './Idx';
-
-declare global {
-  interface Window {
-    did?: DID
-    idx?: IDX
-    ceramic?: CeramicApi
-  }
-}
-
-const ceramicPromise = createCeramic();
-
-export const authenticate = async (): Promise<IDX> => {
-  const [ceramic] = await Promise.all([ceramicPromise])
-  const idx = createIDX(ceramic);
-  window.did = ceramic.did;
-  return idx;
-}
+// Connect to clay testnet - change to mainnet once live
+const core = new Core({ ceramic: 'testnet-clay' });
 
 export const FindProfile = async (address: string) => {
   try {
-    const profile = await getLegacy3BoxProfileAsBasicProfile(address);
-    if (localStorage.getItem(address)) {
-      let entry = JSON.parse(localStorage.getItem(address));
-      return entry;
+    const accountdid = await core.getAccountDID(address);
+    let profile = await core.get('basicProfile', accountdid);
+    if (!profile) {
+      profile = await getLegacy3BoxProfileAsBasicProfile(address);
+      console.log("Switch to new profile using 'edit profile'");
     }
-    else {
-      let profilename: string = profile.name ? profile.name : address;
-      let picturesource;
-      if (profile.image) {
-        picturesource = profile.image.original.src;
-      }
-      let entry = { "name": profilename, "image": picturesource };
-      localStorage.setItem(address, JSON.stringify(entry));
-      return entry;
+    let profilename: string = profile.name ? profile.name : address;
+    let picturesource;
+    if (profile.image) {
+      console.log("image: ", profile.image);
+      picturesource = profile.image.original.src;
     }
-  } catch {
-    console.error("DID not found");
+    let entry = { "name": profilename, "image": picturesource };
+    return entry;
+  }
+  catch {
+    console.error("Profile not found");
   }
 }
