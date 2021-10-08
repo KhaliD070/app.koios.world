@@ -235,6 +235,7 @@ const Contribute = () => {
 
         </div>
       </div>
+      <h3>HALOOOOOOOOOOOO</h3>
     </>
   )
 }
