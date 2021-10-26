@@ -3,6 +3,8 @@
 // import axios from "axios";
 import partnerData from "../assets/data/earnPartners.json";
 
+//import HasFormatter from "../components/HasFormatter";
+
 const Contribute = () => {
   // const [selectedWorld, setSelectedWorld] = useState<string>();
   // const [selectedContribution, setSelectedContribution] = useState<string>();
@@ -209,29 +211,227 @@ const Contribute = () => {
           <p className={'sub-title'}>Thank you for providing a proposal. Sharing is sacred :heart: and we highly appreciate your contribution! Don’t forget to drop your public key and reap the rewards 🚀</p>
           <p>Could be with the same proposal form on the earn page. </p>
         </div>
+
+        <div className={'steps-row'}>
+          <ul className={'item-list'}>
+
+          </ul>
+        </div>
+
         <div>
-
-          <div className={'steps-row'}>
-            <h2 className={'steps-row__number'}>1.</h2>
-            <div className={'steps-row__text-holder'}>
-              <p>{partnerData.one}</p>
-              <a href={partnerData.formUrl}>Take me to the form</a>
+          <form>
+            <div className={'steps-row'}>
+              <h2 className={'steps-row__number'}>1.</h2>
+              <div className={'steps-row__text-holder'}>
+                <label>
+                  <p>Hi there! Let's start with your first name.</p>
+                  <input type="firstName" name="FirstName"/>
+                </label>  
+              </div>
             </div>
-          </div>
 
-          <div className={'steps-row'}>
-            <h2 className={'steps-row__number'}>2.</h2>
-            <div className={'steps-row__text-holder'}>
-              <p>{partnerData.two}</p>
+            <div className={'steps-row'}>
+              <h2 className={'steps-row__number'}>2.</h2>
+              <div className={'steps-row__text-holder'}>
+                <label>
+                  <p>And your last name?</p>
+                  <input type="lastName" name="LastName"/>
+                </label>
+              </div>
             </div>
-          </div>
 
-          <div className={'steps-row'}>
-            <h2 className={'steps-row__number'}>3.</h2>
-            <div className={'steps-row__text-holder'}>
-              <p>{partnerData.three}</p>
+            <div className={'steps-row'}>
+              <h2 className={'steps-row__number'}>3.</h2>
+              <div className={'steps-row__text-holder'}>
+                <label>
+                  <p>What is your public key?</p>
+                  <input type="publicKey" name="PublicKey"/>
+                </label>
+              </div>
             </div>
-          </div>
+
+            <div className={'steps-row'}>
+              <h2 className={'steps-row__number'}>4.</h2>
+              <div className={'steps-row__text-holder'}>
+                <label>
+                  <p>Do you represent an organization or are you acting on an individual basis?</p>
+                  <div>
+                    <button id="0">
+                      <h3>A</h3>
+                      <p className={'steps-row__text-holder'}>I represent some form of organization</p>
+                    </button>
+                    <button id="1">
+                      <h3>B</h3>
+                      <p>I'm flying solo here</p>
+                    </button>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <div className={'steps-row'}>
+              <h2 className={'steps-row__number'}>5.</h2>
+              <div className={'steps-row__text-holder'}>
+                <label>
+                  <p>What is is the name of the organization?</p>
+                  <input type="publicKey" name="PublicKey"/>
+                </label>
+              </div>
+            </div>
+
+            <div className={'steps-row'}>
+              <h2 className={'steps-row__number'}>6.</h2>
+              <div className={'steps-row__text-holder'}>
+                <label>
+                  <p>What is the link to your website?</p>
+                  <input type="publicKey" name="PublicKey"/>
+                </label>
+              </div>
+            </div>
+
+            <div className={'steps-row'}>
+              <h2 className={'steps-row__number'}>7.</h2>
+              <div className={'steps-row__text-holder'}>
+                <label>
+                  <p>What world(s) would you be interested in?</p>
+                  <div>
+                    <button id="0">
+                      <h3>A</h3>
+                      <p>Blockchain Technology</p>
+                    </button>
+                    <button id="1">
+                      <h3>B</h3>
+                      <p>TDFA: Trading Digital & Financial Assets</p>
+                    </button>
+                    <button id="2">
+                      <h3>C</h3>
+                      <p>Datascience & Python</p>
+                    </button>
+                    <button id="3">
+                      <h3>D</h3>
+                      <p>Programming DAPPS</p>
+                    </button>
+                    <button id="4">
+                      <h3>E</h3>
+                      <p>Other</p>
+                    </button>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <div className={'steps-row'}>
+              <h2 className={'steps-row__number'}>8.</h2>
+              <div className={'steps-row__text-holder'}>
+              <label>
+                  <p>What would you like to propose in a Koios World?</p>
+                  <div>
+                    <button id="0">
+                      <h3>A</h3>
+                      <p>Work/learning challenge</p>
+                    </button>
+                    <button id="1">
+                      <h3>B</h3>
+                      <p>Social Activity</p>
+                    </button>
+                    <button id="2">
+                      <h3>C</h3>
+                      <p>Educational content</p>
+                    </button>
+                    <button id="3">
+                      <h3>D</h3>
+                      <p>Koios Improvement Proposal (KIP)</p>
+                    </button>
+                    <button id="4">
+                      <h3>E</h3>
+                      <p>Community Vote</p>
+                    </button>
+                    <button id="5">
+                      <h3>F</h3>
+                      <p>I would like to discuss the creation of a new world</p>
+                    </button>
+                    <button id="6">
+                      <h3>G</h3>
+                      <p>Other</p>
+                    </button>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <div className={'steps-row'}>
+              <h2 className={'steps-row__number'}>9.</h2>
+              <div className={'steps-row__text-holder'}>
+                <label>
+                  <p>Could you please elaborate?</p>
+                  <input type="publicKey" name="PublicKey"/>
+                </label>
+              </div>
+            </div>
+
+            <div className={'steps-row'}>
+              <h2 className={'steps-row__number'}>10.</h2>
+              <div className={'steps-row__text-holder'}>
+                <label>
+                  <p>Would you like to receive a Titan Token Bounty reward?</p>
+                  <div>
+                    <button id="0">
+                      <h3>A</h3>
+                      <p>Yes</p>
+                    </button>
+                    <button id="1">
+                      <h3>B</h3>
+                      <p>No</p>
+                    </button>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <div className={'steps-row'}>
+              <h2 className={'steps-row__number'}>11.</h2>
+              <div className={'steps-row__text-holder'}>
+                <label>
+                  <p>Would you like people to contact you to discuss details?</p>
+                  <div>
+                    <button id="0">
+                      <h3>A</h3>
+                      <p>Yes</p>
+                    </button>
+                    <button id="1">
+                      <h3>B</h3>
+                      <p>No</p>
+                    </button>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <div className={'steps-row'}>
+              <input type="submit" value="Submit"/>
+            </div>
+          </form>
+          {/* <div className={'steps-row'}>
+          //   <h2 className={'steps-row__number'}>1.</h2>
+          //   <div className={'steps-row__text-holder'}>
+          //     <p>{partnerData.one}</p>
+          //     <a href={partnerData.formUrl}>Take me to the form ASAP</a>
+          //   </div>
+          // </div>
+
+          // <div className={'steps-row'}>
+          //   <h2 className={'steps-row__number'}>2.</h2>
+          //   <div className={'steps-row__text-holder'}>
+          //     <p>{partnerData.two}</p>
+          //   </div>
+          // </div>
+
+          // <div className={'steps-row'}>
+          //   <h2 className={'steps-row__number'}>3.</h2>
+          //   <div className={'steps-row__text-holder'}>
+          //     <p>{partnerData.three}</p>
+          //   </div>
+          // </div> */}
 
         </div>
       </div>
