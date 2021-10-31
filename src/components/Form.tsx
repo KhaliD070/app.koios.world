@@ -81,9 +81,14 @@ export class Form extends React.Component<IFormProps, IFormState> {
   ): Promise<void> => {
     e.preventDefault();
 
+    const ul = document.querySelector('.formItemList')!;
+    const li = document.createElement('li');
+    const p = document.createElement('p');
+    p.innerText = Object.values(this.state.values).toString();
+    li.append(p);
+    ul.append(li);
+
     console.log(this.state.values);
-
-
 
     if (this.validateForm()) {
       const submitSuccess: boolean = await this.submitForm();

@@ -264,23 +264,31 @@ import { Field } from "./../components/Field";
 
 export const Contribute: React.SFC = () => {
   return (
-    <Form
-      action="http://localhost:3000/contribute"
-      render={() => (
-        <React.Fragment>
-          <div className="alert alert-info" role="alert">
-            Enter the information below and we'll get back to you as soon as we
-            can.
-          </div>
-          <Field id="notes" label="Notes" editor="multilinetextbox" />
-
-          
-        </React.Fragment>
+    
+    <><div className="wrapper">
+      <h1>Contribute Page</h1>
+      <ul className="formItemList">
         
-      )}
-      
+      </ul>
+    </div>
+    <Form
+        action="http://localhost:3000/contribute"
+        render={() => (
+          <React.Fragment>
+            <div className="alert alert-info" role="alert">
+              Enter the information below and we'll get back to you as soon as we
+              can.
+            </div>
+            <Field id="notes" label="Notes" editor="multilinetextbox" />
 
-    />
+            <div className="alert alert-info" role="alert">
+              Enter second info.
+              </div>
+              <Field id="check" label="Check" editor="multilinetextbox"/>
+
+          </React.Fragment>
+
+        )} /></>
   );
 };
 
