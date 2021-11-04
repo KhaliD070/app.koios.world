@@ -1,11 +1,17 @@
 import * as React from "react";
-
+import { selectedAccount } from "../components/Web3/Web3";
+import { comment } from "../pages/Contribute";
 
 export interface IFormContext extends IFormState {
   /* Function that allows values in the values state to be set */
   setValues: (values: IValues) => void;
 }
+ var arr = [];
+export function comments(){
+  console.log(arr);
+ return arr;
 
+}
 export const FormContext = React.createContext<IFormContext|undefined>(undefined);
 
 interface IFormProps {
@@ -80,15 +86,18 @@ export class Form extends React.Component<IFormProps, IFormState> {
     e: React.FormEvent<HTMLFormElement>
   ): Promise<void> => {
     e.preventDefault();
+    arr.push({ID: selectedAccount, title: this.state.values.notes.toString(), text:this.state.values.check.toString(), vote:[]});
+    comment();
+  
+    //console.log(arr);
+    // const ul = document.querySelector('.formItemList')!;
+    // const li = document.createElement('li');
+    // const p = document.createElement('p');
+    // p.innerText = Object.values(this.state.values).toString();
+    // li.append(p);
+    // ul.append(li);
 
-    const ul = document.querySelector('.formItemList')!;
-    const li = document.createElement('li');
-    const p = document.createElement('p');
-    p.innerText = Object.values(this.state.values).toString();
-    li.append(p);
-    ul.append(li);
-
-    console.log(this.state.values);
+   //console.log(this.state.values);
 
     if (this.validateForm()) {
       const submitSuccess: boolean = await this.submitForm();
@@ -114,8 +123,6 @@ export class Form extends React.Component<IFormProps, IFormState> {
     return true;
   }
 
-  
-
 
 
   private setValues = (values: IValues) => {
@@ -128,43 +135,42 @@ export class Form extends React.Component<IFormProps, IFormState> {
     const { submitSuccess, errors } = this.state;
     const context: IFormContext = {
       ...this.state,
-      setValues: this.setValues
+      setValues: this.setValues 
     };
-
+    
     return (
       <FormContext.Provider value={context}>
         <form onSubmit={this.handleSubmit} noValidate={true}>
-        <div className="container">
-  
-        {this.props.render()}
+          <div className="container">
 
-        <div className="form-group">
+            {this.props.render()}
+
+            <div className="form-group">
 
 
 
-        <button
-          type="submit"
-          className="btn btn-primary"
-          disabled={this.haveErrors(errors)}
-        >
-          Submit 
-        </button>
+              <button
+                type="submit"
+                className="btn btn-primary"
+                disabled={this.haveErrors(errors)}
+              >
+                Submit
+              </button>
 
-    
-        
-      </div>
 
-    
-      
-      </div>
-      
+
+            </div>
+
+
+
+          </div>
+
         </form>
 
-        
+
       </FormContext.Provider>
       
-
-      
+ 
     );
 
     

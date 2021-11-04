@@ -47,7 +47,7 @@ return (
               }
               onBlur={
                 (e: React.FormEvent<HTMLTextAreaElement>) =>
-                  console.log(e) /* TODO: validate field value */
+                  console.log() /* TODO: validate field value */
               }
               className="form-control"
             />

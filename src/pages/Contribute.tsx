@@ -1,12 +1,8 @@
-import worldData from '../assets/data/contribute/formData.json'
-import {useState} from "react";
-import axios from "axios";
-import partnerData from "../assets/data/earnPartners.json";
 import * as React from "react";
-
 import { Form } from "./../components/Form";
 import { Field } from "./../components/Field";
-
+import { comments } from './../components/Form';
+import { selectedAccount } from '../components/Web3/Web3';
 
 
 // const Contribute = () => {
@@ -260,16 +256,48 @@ import { Field } from "./../components/Field";
 
 // }
 
+function removeValue(array,value){
+return array.filter(function(ele){
+  return ele !=value;
+});
+}
+const upvote = (index) => {
+  if(selectedAccount){
+  if(arr[index].vote.includes(selectedAccount) ){
+    arr[index].vote = removeValue(arr[index].vote, selectedAccount);
+    saveValues();
+  } 
+  else{
+   console.log(arr[index]);
+  
+    arr[index].vote.push(selectedAccount);
+    saveValues();
+  }
+ window.location.reload();
+}
+}
+var arr = []
+export function comment() {
+arr = comments();
+console.log(arr)
+saveValues();
 
-
+}
+function saveValues(){
+  localStorage.setItem("comments", JSON.stringify(arr));
+}
+function getValues(){
+  const array =  localStorage.getItem("comments");
+  arr = JSON.parse(array);
+}
 export const Contribute: React.SFC = () => {
+getValues();
+
   return (
     
     <><div className="wrapper">
       <h1>Contribute Page</h1>
-      <ul className="formItemList">
-        
-      </ul>
+ 
     </div>
     <Form
         action="http://localhost:3000/contribute"
@@ -288,8 +316,32 @@ export const Contribute: React.SFC = () => {
 
           </React.Fragment>
 
-        )} /></>
+        )}
+      
+         />
+        
+          <ul>
+          {arr.map((comments:any, index:number) =>{
+            return(
+              <li key={index} >
+                <p>{comments.text}</p>
+                <p>{comments.title}</p>
+                <p>{ arr[index].vote.length} </p><button className="voteButton" onClick={() =>upvote(index)}>like</button>
+              </li>
+            );
+          })
+          }
+        
+        </ul>
+      
+        <ul className ="formItemList">
+
+        </ul>
+        </>
+
+      
   );
+ 
 };
 
 
