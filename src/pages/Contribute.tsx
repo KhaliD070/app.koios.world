@@ -304,15 +304,15 @@ getValues();
         render={() => (
           <React.Fragment>
             <div className="alert alert-info" role="alert">
-              Enter the information below and we'll get back to you as soon as we
-              can.
+              Enter a title.
             </div>
-            <Field id="notes" label="Notes" editor="multilinetextbox" />
+            <Field id="title" label="Title" editor="multilinetextbox" />
 
             <div className="alert alert-info" role="alert">
-              Enter second info.
+              Enter the information below and we'll get back to you as soon as we
+              can.
               </div>
-              <Field id="check" label="Check" editor="multilinetextbox"/>
+              <Field id="text" label="Text" editor="multilinetextbox"/>
 
           </React.Fragment>
 
@@ -320,13 +320,13 @@ getValues();
       
          />
         
-          <ul>
+          <ul className="commentList">
           {arr.map((comments:any, index:number) =>{
             return(
-              <li key={index} >
-                <p>{comments.text}</p>
-                <p>{comments.title}</p>
-                <p>{ arr[index].vote.length} </p><button className="voteButton" onClick={() =>upvote(index)}>like</button>
+              <li key={index} className="row" >
+                <h5 className="col-2">{comments.title}</h5>
+                <p className="col-12">{comments.text}</p>
+                <p className="col-1 vote">{ arr[index].vote.length} </p><button className="voteButton col-1" onClick={() =>upvote(index)}><img src={'/images/thumbs-up.svg'} alt={'like'} className={'voteImg'}/></button>
               </li>
             );
           })

@@ -285,3 +285,17 @@
     transform: translateX(0);
   }
 }
+.commentList{
+  padding-left: 20px;
+}
+.vote{
+  padding-top:15px;
+}
+.voteButton{
+  background-color: none;
+  border: none;
+  
+}
+.voteButton:focus{
+  outline: none;
+}

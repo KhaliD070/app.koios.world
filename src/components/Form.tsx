@@ -86,7 +86,7 @@ export class Form extends React.Component<IFormProps, IFormState> {
     e: React.FormEvent<HTMLFormElement>
   ): Promise<void> => {
     e.preventDefault();
-    arr.push({ID: selectedAccount, title: this.state.values.notes.toString(), text:this.state.values.check.toString(), vote:[]});
+    arr.push({ID: selectedAccount, title: this.state.values.title.toString(), text:this.state.values.text.toString(), vote:[]});
     comment();
   
     //console.log(arr);
