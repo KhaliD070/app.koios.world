@@ -1,5 +1,5 @@
 import * as React from "react";
-import { selectedAccount } from "../components/Web3/Web3";
+import { selectedAccount, profileName } from "../components/Web3/Web3";
 import { comment } from "../pages/Contribute";
 
 export interface IFormContext extends IFormState {
@@ -86,7 +86,7 @@ export class Form extends React.Component<IFormProps, IFormState> {
     e: React.FormEvent<HTMLFormElement>
   ): Promise<void> => {
     e.preventDefault();
-    arr.push({ID: selectedAccount, title: this.state.values.title.toString(), text:this.state.values.text.toString(), vote:[]});
+    arr.push({ID: selectedAccount,name:profileName, title: this.state.values.title.toString(), text:this.state.values.text.toString(), vote:[]});
     comment();
   
     //console.log(arr);

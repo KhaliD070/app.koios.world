@@ -2,7 +2,7 @@ import * as React from "react";
 import { Form } from "./../components/Form";
 import { Field } from "./../components/Field";
 import { comments } from './../components/Form';
-import { selectedAccount } from '../components/Web3/Web3';
+import { selectedAccount, profileName } from '../components/Web3/Web3';
 
 
 // const Contribute = () => {
@@ -255,6 +255,7 @@ import { selectedAccount } from '../components/Web3/Web3';
 
 
 // }
+var arr = [];
 
 function removeValue(array,value){
 return array.filter(function(ele){
@@ -276,7 +277,7 @@ const upvote = (index) => {
  window.location.reload();
 }
 }
-var arr = []
+
 export function comment() {
 arr = comments();
 console.log(arr)
@@ -287,8 +288,10 @@ function saveValues(){
   localStorage.setItem("comments", JSON.stringify(arr));
 }
 function getValues(){
+  if(localStorage.getItem("comments")){
   const array =  localStorage.getItem("comments");
   arr = JSON.parse(array);
+  }
 }
 export const Contribute: React.SFC = () => {
 getValues();
@@ -323,11 +326,14 @@ getValues();
           <ul className="commentList">
           {arr.map((comments:any, index:number) =>{
             return(
+              <div>
               <li key={index} className="row" >
-                <h5 className="col-2">{comments.title}</h5>
+                <h5 className="col-3">{comments.title} </h5><p className="col-4"> By: {comments.name}</p>
                 <p className="col-12">{comments.text}</p>
-                <p className="col-1 vote">{ arr[index].vote.length} </p><button className="voteButton col-1" onClick={() =>upvote(index)}><img src={'/images/thumbs-up.svg'} alt={'like'} className={'voteImg'}/></button>
+                <h6 className="col-1 vote">{ arr[index].vote.length} </h6><button className="voteButton col-1" onClick={() =>upvote(index)}><img src={'/images/thumbs-up.svg'} alt={'like'} className={'voteImg'}/></button>
               </li>
+              <br/>
+              </div>
             );
           })
           }
